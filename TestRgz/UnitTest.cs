@@ -308,7 +308,7 @@ namespace TestRgz
 
             Xunit.Assert.Equal("Unknown", radio.Manufacturer);
             Xunit.Assert.Equal(300, radio.Price);
-            Xunit.Assert.Equal(0.5, radio.TransmitterPower);
+            Xunit.Assert.Equal(0.0, radio.TransmitterPower);
             Xunit.Assert.Equal(0, radio.HasBluetooth);
         }
 
@@ -330,7 +330,7 @@ namespace TestRgz
 
             radio.TransmitterPower = -10;
 
-            Xunit.Assert.Equal(0.5, radio.TransmitterPower);
+            Xunit.Assert.Equal(0.0, radio.TransmitterPower);
         }
 
         [Fact]
@@ -340,7 +340,7 @@ namespace TestRgz
 
             radio.TransmitterPower = 250;
 
-            Xunit.Assert.Equal(0.5, radio.TransmitterPower);
+            Xunit.Assert.Equal(0.0, radio.TransmitterPower);
         }
 
         [Fact]

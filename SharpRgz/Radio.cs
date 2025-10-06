@@ -1,13 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SharpRgz
 {
     public class Radio : AudioAndVideo
     {
+        private const double MinTransmitterPower = 0.0;
+        private const double MaxTransmitterPower = 200.0;
+
+        private const short MinHasBluetooth = 0;
+        private const short MaxHasBluetooth = 1;
+
+        private const int MinPriceForRadio = 300;
+        private const int MaxPriceForRadio = 100000;
+
         private double transmitterPower;
         private short hasBluetooth;
 
@@ -16,8 +21,8 @@ namespace SharpRgz
             get => transmitterPower;
             set
             {
-                if (value < 0 || value > 200)
-                    transmitterPower = 0.5;
+                if (value < MinTransmitterPower || value > MaxTransmitterPower)
+                    transmitterPower = MinTransmitterPower;
                 else
                     transmitterPower = value;
             }
@@ -28,8 +33,8 @@ namespace SharpRgz
             get => hasBluetooth;
             set
             {
-                if (value != 0 && value != 1)
-                    hasBluetooth = 0;
+                if (value != MinHasBluetooth && value != MaxHasBluetooth)
+                    hasBluetooth = MinHasBluetooth;
                 else
                     hasBluetooth = value;
             }
@@ -37,9 +42,9 @@ namespace SharpRgz
 
         public Radio() : base()
         {
-            TransmitterPower = 0.5;
-            HasBluetooth = 0;
-            Price = 300;
+            TransmitterPower = MinTransmitterPower;
+            HasBluetooth = MinHasBluetooth;
+            Price = MinPriceForRadio;
         }
 
         public Radio(string manufacturer, int price, double transmitterPower, short hasBluetooth) : base()
@@ -54,27 +59,24 @@ namespace SharpRgz
 
         protected void Init(string manufacturer, int price, double transmitterPower, short hasBluetooth)
         {
-            // Используем базовый Init для manufacturer и price
             base.Init(manufacturer, price);
 
-            // Проверка и установка transmitterPower
-            if (transmitterPower < 0 || transmitterPower > 200)
-                this.transmitterPower = 0.5;
+            if (transmitterPower < MinTransmitterPower || transmitterPower > MaxTransmitterPower)
+                this.transmitterPower = MinTransmitterPower;
             else
                 this.transmitterPower = transmitterPower;
 
-            // Проверка и установка hasBluetooth
-            if (hasBluetooth != 0 && hasBluetooth != 1)
-                this.hasBluetooth = 0;
+            if (hasBluetooth != MinHasBluetooth && hasBluetooth != MaxHasBluetooth)
+                this.hasBluetooth = MinHasBluetooth;
             else
                 this.hasBluetooth = hasBluetooth;
 
-            // Дополнительная проверка цены для Radio
-            if (price < 300 || price > 100000)
-                Price = 300;
+            if (price < MinPriceForRadio || price > MaxPriceForRadio)
+                Price = MinPriceForRadio;
+            else
+                Price = price;
         }
 
-        // Оператор присваивания
         public Radio Assign(Radio other)
         {
             if (this != other)
@@ -87,13 +89,11 @@ namespace SharpRgz
             return this;
         }
 
-        // Переопределение метода ToString()
         public override string ToString()
         {
             return Print();
         }
 
-        // Метод Print с вызовом базового метода
         protected new string Print()
         {
             string baseString = base.Print();

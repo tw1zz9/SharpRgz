@@ -1,13 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SharpRgz
 {
     public class TvSet : AudioAndVideo
     {
+        private const short MinFrequency = 50;
+        private const short MaxFrequency = 360;
+
+        private const short MinDiagonalSize = 24;
+        private const short MaxDiagonalSize = 115;
+
+        private const int MinPriceForTv = 7000;
+        private const int MaxPriceForTv = 7000000;
+
         private short frequency;
         private short diagonalSize;
 
@@ -16,8 +21,8 @@ namespace SharpRgz
             get => frequency;
             set
             {
-                if (value < 50 || value > 360)
-                    frequency = 50;
+                if (value < MinFrequency || value > MaxFrequency)
+                    frequency = MinFrequency;
                 else
                     frequency = value;
             }
@@ -28,8 +33,8 @@ namespace SharpRgz
             get => diagonalSize;
             set
             {
-                if (value < 24 || value > 115)
-                    diagonalSize = 24;
+                if (value < MinDiagonalSize || value > MaxDiagonalSize)
+                    diagonalSize = MinDiagonalSize;
                 else
                     diagonalSize = value;
             }
@@ -37,9 +42,9 @@ namespace SharpRgz
 
         public TvSet() : base()
         {
-            Frequency = 50;
-            DiagonalSize = 24;
-            Price = 7000;
+            Frequency = MinFrequency;
+            DiagonalSize = MinDiagonalSize;
+            Price = MinPriceForTv;
         }
 
         public TvSet(string manufacturer, int price, short frequency, short diagonalSize) : base()
@@ -54,27 +59,17 @@ namespace SharpRgz
 
         protected void Init(string manufacturer, int price, short frequency, short diagonalSize)
         {
-            // Используем базовый Init для manufacturer и price
             base.Init(manufacturer, price);
 
-            // Проверка и установка frequency
-            if (frequency < 50 || frequency > 360)
-                this.frequency = 50;
-            else
-                this.frequency = frequency;
+            Frequency = frequency;
+            DiagonalSize = diagonalSize;
 
-            // Проверка и установка diagonalSize
-            if (diagonalSize < 24 || diagonalSize > 115)
-                this.diagonalSize = 24;
+            if (price < MinPriceForTv || price > MaxPriceForTv)
+                Price = MinPriceForTv;
             else
-                this.diagonalSize = diagonalSize;
-
-            // Дополнительная проверка цены для TV
-            if (price < 7000 || price > 7000000)
-                Price = 7000;
+                Price = price;
         }
 
-        // Оператор присваивания
         public TvSet Assign(TvSet other)
         {
             if (this != other)
@@ -87,13 +82,11 @@ namespace SharpRgz
             return this;
         }
 
-        // Переопределение метода ToString()
         public override string ToString()
         {
             return Print();
         }
 
-        // Метод Print с вызовом базового метода
         protected new string Print()
         {
             string baseString = base.Print();

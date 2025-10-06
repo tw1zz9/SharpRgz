@@ -1,13 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SharpRgz
 {
     public class AudioAndVideo
     {
+        private const int MinPrice = 300;
+        private const int MaxPrice = 7000000;
+        private const string DefaultManufacturer = "Unknown";
+
         private string manufacturer;
         private int price;
 
@@ -24,7 +24,7 @@ namespace SharpRgz
                 catch (ArgumentException e)
                 {
                     Console.Error.WriteLine(e.Message);
-                    manufacturer = "Unknown";
+                    manufacturer = DefaultManufacturer;
                 }
             }
         }
@@ -34,8 +34,8 @@ namespace SharpRgz
             get => price;
             set
             {
-                if (value < 300 || value > 7000000)
-                    price = 300;
+                if (value < MinPrice || value > MaxPrice)
+                    price = MinPrice;  // заменили DefaultPrice на MinPrice
                 else
                     price = value;
             }
@@ -43,8 +43,8 @@ namespace SharpRgz
 
         public AudioAndVideo()
         {
-            Manufacturer = "Unknown";
-            Price = 0;
+            Manufacturer = DefaultManufacturer;
+            Price = MinPrice;  // заменили 0 на MinPrice
         }
 
         public AudioAndVideo(string manufacturer, int price)
@@ -67,11 +67,11 @@ namespace SharpRgz
             catch (ArgumentException e)
             {
                 Console.Error.WriteLine(e.Message);
-                this.manufacturer = "Unknown";
+                this.manufacturer = DefaultManufacturer;
             }
 
-            if (price < 300 || price > 7000000)
-                this.price = 300;
+            if (price < MinPrice || price > MaxPrice)
+                this.price = MinPrice; // заменили DefaultPrice на MinPrice
             else
                 this.price = price;
         }
@@ -103,7 +103,6 @@ namespace SharpRgz
             manufacturer = new string(chars);
         }
 
-        // Оператор присваивания
         public AudioAndVideo Assign(AudioAndVideo other)
         {
             if (this != other)
@@ -114,13 +113,11 @@ namespace SharpRgz
             return this;
         }
 
-        // Переопределение метода ToString()
         public override string ToString()
         {
             return Print();
         }
 
-        // "Метод" Print
         protected string Print()
         {
             return "Basic Specifications of Audio and Videodevices" + Environment.NewLine +
