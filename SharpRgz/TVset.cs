@@ -8,12 +8,36 @@ namespace SharpRgz
 {
     public class TvSet : AudioAndVideo
     {
-        public short Frequency { get; set; }
-        public short DiagonalSize { get; set; }
+        private short frequency;
+        private short diagonalSize;
+
+        public short Frequency
+        {
+            get => frequency;
+            set
+            {
+                if (value < 50 || value > 360)
+                    frequency = 50;
+                else
+                    frequency = value;
+            }
+        }
+
+        public short DiagonalSize
+        {
+            get => diagonalSize;
+            set
+            {
+                if (value < 24 || value > 115)
+                    diagonalSize = 24;
+                else
+                    diagonalSize = value;
+            }
+        }
 
         public TvSet() : base()
         {
-            Frequency = 50; 
+            Frequency = 50;
             DiagonalSize = 24;
             Price = 7000;
         }
@@ -30,31 +54,24 @@ namespace SharpRgz
 
         protected void Init(string manufacturer, int price, short frequency, short diagonalSize)
         {
-            try
-            {
-                IsStr(manufacturer);
-                Manufacturer = manufacturer;
-            }
-            catch (ArgumentException e)
-            {
-                Console.Error.WriteLine(e.Message);
-                Manufacturer = "Unknown";
-            }
+            // Используем базовый Init для manufacturer и price
+            base.Init(manufacturer, price);
 
+            // Проверка и установка frequency
+            if (frequency < 50 || frequency > 360)
+                this.frequency = 50;
+            else
+                this.frequency = frequency;
+
+            // Проверка и установка diagonalSize
+            if (diagonalSize < 24 || diagonalSize > 115)
+                this.diagonalSize = 24;
+            else
+                this.diagonalSize = diagonalSize;
+
+            // Дополнительная проверка цены для TV
             if (price < 7000 || price > 7000000)
                 Price = 7000;
-            else
-                Price = price;
-
-            if (frequency < 50 || frequency > 360)
-                Frequency = 50;
-            else
-                Frequency = frequency;
-
-            if (diagonalSize < 24 || diagonalSize > 115)
-                DiagonalSize = 24;
-            else
-                DiagonalSize = diagonalSize;
         }
 
         // Оператор присваивания

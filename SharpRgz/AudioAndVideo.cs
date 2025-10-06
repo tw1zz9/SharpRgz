@@ -8,8 +8,38 @@ namespace SharpRgz
 {
     public class AudioAndVideo
     {
-        protected string Manufacturer { get; set; }
-        protected int Price { get; set; }
+        private string manufacturer;
+        private int price;
+
+        public string Manufacturer
+        {
+            get => manufacturer;
+            set
+            {
+                try
+                {
+                    IsStr(value);
+                    manufacturer = value;
+                }
+                catch (ArgumentException e)
+                {
+                    Console.Error.WriteLine(e.Message);
+                    manufacturer = "Unknown";
+                }
+            }
+        }
+
+        public int Price
+        {
+            get => price;
+            set
+            {
+                if (value < 300 || value > 7000000)
+                    price = 300;
+                else
+                    price = value;
+            }
+        }
 
         public AudioAndVideo()
         {
@@ -32,18 +62,18 @@ namespace SharpRgz
             try
             {
                 IsStr(manufacturer);
-                Manufacturer = manufacturer;
+                this.manufacturer = manufacturer;
             }
             catch (ArgumentException e)
             {
                 Console.Error.WriteLine(e.Message);
-                Manufacturer = "Unknown";
+                this.manufacturer = "Unknown";
             }
 
             if (price < 300 || price > 7000000)
-                Price = 300;
+                this.price = 300;
             else
-                Price = price;
+                this.price = price;
         }
 
         protected void IsStr(string str)
@@ -69,6 +99,8 @@ namespace SharpRgz
                 }
                 else throw new ArgumentException("Incorrect input!");
             }
+
+            manufacturer = new string(chars);
         }
 
         // Оператор присваивания

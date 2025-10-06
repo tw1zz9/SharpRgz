@@ -116,7 +116,7 @@ namespace SharpRgz
             {
                 string manufacturer = InputString("Enter manufacturer: ");
                 int price = InputInt("Enter price: ");
-                double transmitterPower = InputDouble("Enter transmitter power (0-10): ");
+                double transmitterPower = InputDouble("Enter transmitter power (0-200): ");
                 short hasBluetooth = InputShort("Does it have bluetooth? (1 for yes, 0 for no): ");
 
                 obj = new Radio(manufacturer, price, transmitterPower, hasBluetooth);
