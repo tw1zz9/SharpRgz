@@ -8,14 +8,14 @@ namespace SharpRgz
 {
     class Program
     {
-        private static List<AudioAndVideo> objects = new List<AudioAndVideo>();
+        private static List<AudioAndVideo> objects = new List<AudioAndVideo>(); // Лист объектов
 
         static void Main(string[] args)
         {
             int choice = 0;
             bool running = true;
 
-            while (running)
+            while (running) // Вход в бесконечный цикл выбора для свитчей
             {
                 Console.WriteLine("\nMenu:");
                 Console.WriteLine(" 1. Add an object");
@@ -23,18 +23,18 @@ namespace SharpRgz
                 Console.WriteLine(" 3. Exit");
                 Console.Write("Enter your choice: ");
 
-                if (int.TryParse(Console.ReadLine(), out choice))
+                if (int.TryParse(Console.ReadLine(), out choice))  // Выбор
                 {
                     switch (choice)
                     {
                         case 1:
-                            AddObject();
+                            AddObject();  // Добавить объект
                             break;
                         case 2:
-                            PrintObjects();
+                            PrintObjects(); // Вывести все объекты
                             break;
                         case 3:
-                            running = false;
+                            running = false;  // Закончить работу
                             break;
                         default:
                             Console.WriteLine("Invalid choice. Please try again.");
@@ -43,20 +43,20 @@ namespace SharpRgz
                 }
                 else
                 {
-                    Console.WriteLine("Invalid input. Please enter a number.");
+                    Console.WriteLine("Invalid input. Please enter a number.");  // Ошибка, повтор ввода
                 }
             }
 
             CleanupObjects();
         }
 
-        static string InputString(string prompt)
+        static string InputString(string prompt)  // Ввод строкового формата
         {
             Console.Write(prompt);
             return Console.ReadLine();
         }
 
-        static int InputInt(string prompt)
+        static int InputInt(string prompt)  // Ввод целого числа
         {
             Console.Write(prompt);
             int result;
@@ -67,7 +67,7 @@ namespace SharpRgz
             return result;
         }
 
-        static double InputDouble(string prompt)
+        static double InputDouble(string prompt)  // Ввод вещественного числа
         {
             Console.Write(prompt);
             double result;
@@ -78,7 +78,7 @@ namespace SharpRgz
             return result;
         }
 
-        static short InputShort(string prompt)
+        static short InputShort(string prompt)  // Ввод "шорта"
         {
             Console.Write(prompt);
             short result;
@@ -89,7 +89,7 @@ namespace SharpRgz
             return result;
         }
 
-        static void AddObject()
+        static void AddObject()  // Добавление объекта
         {
             Console.WriteLine("\nSelect the type of object to add:");
             Console.WriteLine(" 1. Audio and video");
@@ -99,7 +99,7 @@ namespace SharpRgz
 
             if (!int.TryParse(Console.ReadLine(), out int type))
             {
-                Console.WriteLine("Invalid type selected.");
+                Console.WriteLine("Invalid type selected.");  //  Неверный выбор
                 return;
             }
 
@@ -140,7 +140,7 @@ namespace SharpRgz
             Console.WriteLine("Object added successfully.");
         }
 
-        static void PrintObjects()
+        static void PrintObjects()  // Вывод объектов
         {
             if (objects.Count == 0)
             {
@@ -156,7 +156,7 @@ namespace SharpRgz
             }
         }
 
-        static void CleanupObjects()
+        static void CleanupObjects()  // Очищение листа после работы с ним
         {
             objects.Clear();
         }

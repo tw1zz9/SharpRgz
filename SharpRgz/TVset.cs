@@ -70,7 +70,7 @@ namespace SharpRgz
                 Price = price;
         }
 
-        public TvSet Assign(TvSet other)
+        public TvSet Assign(TvSet other) // Сравнение
         {
             if (this != other)
             {
@@ -82,12 +82,12 @@ namespace SharpRgz
             return this;
         }
 
-        public override string ToString()
+        public override string ToString() // Конвертирование в строку
         {
             return Print();
         }
 
-        protected new string Print()
+        protected new string Print() // Вывод
         {
             string baseString = base.Print();
             return baseString + $"\tFrequency: {Frequency}\n\tDiagonal size: {DiagonalSize}\n\n";

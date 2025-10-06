@@ -77,7 +77,7 @@ namespace SharpRgz
                 Price = price;
         }
 
-        public Radio Assign(Radio other)
+        public Radio Assign(Radio other) // Сравнение
         {
             if (this != other)
             {
@@ -89,12 +89,12 @@ namespace SharpRgz
             return this;
         }
 
-        public override string ToString()
+        public override string ToString() // Конвертирование в строку
         {
             return Print();
         }
 
-        protected new string Print()
+        protected new string Print() // Вывод
         {
             string baseString = base.Print();
             return baseString + $"\tTransmitter power: {TransmitterPower}\n\tHas bluetooth: {HasBluetooth}\n";

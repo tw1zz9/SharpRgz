@@ -4,7 +4,7 @@ namespace SharpRgz
 {
     public class AudioAndVideo
     {
-        private const int MinPrice = 300;
+        private const int MinPrice = 300; 
         private const int MaxPrice = 7000000;
         private const string DefaultManufacturer = "Unknown";
 
@@ -35,7 +35,7 @@ namespace SharpRgz
             set
             {
                 if (value < MinPrice || value > MaxPrice)
-                    price = MinPrice;  // заменили DefaultPrice на MinPrice
+                    price = MinPrice;  
                 else
                     price = value;
             }
@@ -44,7 +44,7 @@ namespace SharpRgz
         public AudioAndVideo()
         {
             Manufacturer = DefaultManufacturer;
-            Price = MinPrice;  // заменили 0 на MinPrice
+            Price = MinPrice; 
         }
 
         public AudioAndVideo(string manufacturer, int price)
@@ -57,7 +57,7 @@ namespace SharpRgz
             Init(other.Manufacturer, other.Price);
         }
 
-        protected void Init(string manufacturer, int price)
+        protected void Init(string manufacturer, int price) 
         {
             try
             {
@@ -71,12 +71,12 @@ namespace SharpRgz
             }
 
             if (price < MinPrice || price > MaxPrice)
-                this.price = MinPrice; // заменили DefaultPrice на MinPrice
+                this.price = MinPrice;
             else
                 this.price = price;
         }
 
-        protected void IsStr(string str)
+        protected void IsStr(string str) // Проверка на строковый формат и преобразование в него
         {
             if (string.IsNullOrEmpty(str))
                 throw new ArgumentException("Empty input!");
@@ -103,7 +103,7 @@ namespace SharpRgz
             manufacturer = new string(chars);
         }
 
-        public AudioAndVideo Assign(AudioAndVideo other)
+        public AudioAndVideo Assign(AudioAndVideo other) // Сравнение
         {
             if (this != other)
             {
@@ -113,12 +113,12 @@ namespace SharpRgz
             return this;
         }
 
-        public override string ToString()
+        public override string ToString() // Конвертирование в строку
         {
             return Print();
         }
 
-        protected string Print()
+        protected string Print() // Вывод
         {
             return "Basic Specifications of Audio and Videodevices" + Environment.NewLine +
                    $"\tManufacturer: {Manufacturer}" + Environment.NewLine +
